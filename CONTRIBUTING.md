@@ -48,7 +48,7 @@ Please create a new branch from an up to date master on your fork.
 4. Make your changes, lint, then push to to github with `git push --set-upstream origin my-topic-branch`.
 5. Visit github and make your pull request.
 
-If you have an existing local repositiry, please update it before you start, to minimise the chance of merge conflicts.
+If you have an existing local repository, please update it before you start, to minimise the chance of merge conflicts.
 ```js
 git remote add upstream git@github.com:callemall/material-ui.git
 git checkout master
@@ -67,8 +67,6 @@ npm install
 npm start
 ```
 You can now access the documentation site [locally](http://localhost:3000).
-
-If you find you need to use `console.log()` or `debugger`, you will need to temporarily disable linting. Simply comment out the [`preLoaders` section](https://github.com/callemall/material-ui/blob/master/docs/webpack-dev-server.config.js#L62) of `docs/webpack-dev-server.config.js`
 
 Test coverage is limited at present, but where possible, please add tests for any changes you make. Tests can be run with `npm run test`.
 

@@ -1,25 +1,30 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
+import injectTheme from './fixtures/inject-theme';
 
-const Divider = require('divider');
+const Divider = require('Divider').default;
 const ActionAccessibility = require('svg-icons').ActionAccessibility;
 
 import ImportGetMuiTheme from 'styles/getMuiTheme';
-const RequireGetMuiTheme = require('styles/getMuiTheme');
+const RequireGetMuiTheme = require('styles/getMuiTheme').default;
 
-import ImportColorManipulator from 'utils/color-manipulator';
-const RequireColorManipulator = require('utils/color-manipulator');
+import ImportColorManipulator from 'utils/colorManipulator';
+const RequireColorManipulator = require('utils/colorManipulator').default;
 
-describe('require() style import of ', () => {
+describe('require() style import of ', ()
+  => {
+  const ThemedDivider = injectTheme(Divider);
+  const ThemedActionAccessibility = injectTheme(ActionAccessibility);
+
   it('Divider component should not fail when rendering', () => {
     expect(() => {
-      TestUtils.renderIntoDocument(<Divider />);
+      TestUtils.renderIntoDocument(<ThemedDivider />);
     }).to.not.throw(Error);
   });
 
   it('ActionAccessibility component should not fail when rendering', () => {
     expect(() => {
-      TestUtils.renderIntoDocument(<ActionAccessibility />);
+      TestUtils.renderIntoDocument(<ThemedActionAccessibility />);
     }).to.not.throw(Error);
   });
 
@@ -27,7 +32,7 @@ describe('require() style import of ', () => {
     expect(RequireGetMuiTheme).to.eql(ImportGetMuiTheme);
   });
 
-  it('ColorManipulator should have same result as ES6 style import', () => {
+  it('colorManipulator should have same result as ES6 style import', () => {
     expect(RequireColorManipulator).to.eql(ImportColorManipulator);
   });
 });

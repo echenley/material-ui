@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
-import ColorManipulator from '../utils/colorManipulator';
+import {fade} from '../utils/colorManipulator';
 import transitions from '../styles/transitions';
 import EnhancedButton from '../internal/EnhancedButton';
 import IconButton from '../IconButton';
 import OpenIcon from '../svg-icons/navigation/expand-less';
 import CloseIcon from '../svg-icons/navigation/expand-more';
-import NestedList from './NestedIist';
+import NestedList from './NestedList';
 
 function getStyles(props, context, state) {
   const {
@@ -28,7 +28,7 @@ function getStyles(props, context, state) {
   const {listItem} = muiTheme;
 
   const textColor = muiTheme.baseTheme.palette.textColor;
-  const hoverColor = ColorManipulator.fade(textColor, 0.1);
+  const hoverColor = fade(textColor, 0.1);
   const singleAvatar = !secondaryText && (leftAvatar || rightAvatar);
   const singleNoAvatar = !secondaryText && !(leftAvatar || rightAvatar);
   const twoLine = secondaryText && secondaryTextLines === 1;

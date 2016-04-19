@@ -2,14 +2,18 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+
+const styles = {
+  radioButton: {
+    marginTop: 16,
+  },
+};
 
 /**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
+ * Dialog content can be scrollable.
  */
-export default class DialogExampleSimple extends React.Component {
+export default class DialogExampleScrollable extends React.Component {
   state = {
     open: false,
   };
@@ -37,17 +41,32 @@ export default class DialogExampleSimple extends React.Component {
       />,
     ];
 
+    const radios = [];
+    for (let i = 0; i < 30; i++) {
+      radios.push(
+        <RadioButton
+          key={i}
+          value={`value${i + 1}`}
+          label={`Option ${i + 1}`}
+          style={styles.radioButton}
+        />
+      );
+    }
+
     return (
       <div>
-        <RaisedButton label="Dialog" onTouchTap={this.handleOpen} />
+        <RaisedButton label="Scrollable Dialog" onTouchTap={this.handleOpen} />
         <Dialog
-          title="Dialog With Actions"
+          title="Scrollable Dialog"
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
+          autoScrollBodyContent={true}
         >
-          The actions in this window were passed in as an array of React objects.
+          <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
+            {radios}
+          </RadioButtonGroup>
         </Dialog>
       </div>
     );

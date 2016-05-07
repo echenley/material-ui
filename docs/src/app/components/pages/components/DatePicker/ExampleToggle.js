@@ -1,6 +1,5 @@
 import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
-import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 
 const optionsStyle = {
@@ -8,8 +7,10 @@ const optionsStyle = {
   marginRight: 'auto',
 };
 
+/**
+ * This example allows you to set a date range, and to toggle `autoOk`, and `disableYearSelection`.
+ */
 export default class DatePickerExampleToggle extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -28,15 +29,15 @@ export default class DatePickerExampleToggle extends React.Component {
     };
   }
 
-  handleChangeMinDate = (event) => {
+  handleChangeMinDate = (event, date) => {
     this.setState({
-      minDate: new Date(event.target.value),
+      minDate: date,
     });
   };
 
-  handleChangeMaxDate = (event) => {
+  handleChangeMaxDate = (event, date) => {
     this.setState({
-      maxDate: new Date(event.target.value),
+      maxDate: date,
     });
   };
 
@@ -50,27 +51,31 @@ export default class DatePickerExampleToggle extends React.Component {
     return (
       <div>
         <DatePicker
-          hintText="Ranged Date Picker"
+          floatingLabelText="Ranged Date Picker"
           autoOk={this.state.autoOk}
           minDate={this.state.minDate}
           maxDate={this.state.maxDate}
           disableYearSelection={this.state.disableYearSelection}
         />
         <div style={optionsStyle}>
-          <TextField
-            floatingLabelText="Min Date"
-            value={this.state.minDate.toDateString()}
+          <DatePicker
             onChange={this.handleChangeMinDate}
+            autoOk={this.state.autoOk}
+            floatingLabelText="Min Date"
+            defaultDate={this.state.minDate}
+            disableYearSelection={this.state.disableYearSelection}
           />
-          <TextField
-            floatingLabelText="Max Date"
-            value={this.state.maxDate.toDateString()}
+          <DatePicker
             onChange={this.handleChangeMaxDate}
+            autoOk={this.state.autoOk}
+            floatingLabelText="Max Date"
+            defaultDate={this.state.maxDate}
+            disableYearSelection={this.state.disableYearSelection}
           />
           <Toggle
             name="autoOk"
             value="autoOk"
-            label="Auto Accept"
+            label="Auto Ok"
             toggled={this.state.autoOk}
             onToggle={this.handleToggle}
           />

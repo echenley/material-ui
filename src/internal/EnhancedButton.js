@@ -210,6 +210,7 @@ class EnhancedButton extends Component {
       this.focusTimeout = setTimeout(() => {
         if (tabPressed) {
           this.setKeyboardFocus(event);
+          tabPressed = false;
         }
       }, 150);
 
@@ -266,7 +267,6 @@ class EnhancedButton extends Component {
 
     const mergedStyles = Object.assign({
       border: 10,
-      background: 'none',
       boxSizing: 'border-box',
       display: 'inline-block',
       fontFamily: this.context.muiTheme.baseTheme.fontFamily,
@@ -274,7 +274,8 @@ class EnhancedButton extends Component {
       cursor: disabled ? 'default' : 'pointer',
       textDecoration: 'none',
       outline: 'none',
-      font: 'inherit',
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
       /**
        * This is needed so that ripples do not bleed
        * past border radius.
@@ -284,6 +285,12 @@ class EnhancedButton extends Component {
       transform: disableTouchRipple && disableFocusRipple ? null : 'translate3d(0, 0, 0)',
       verticalAlign: other.hasOwnProperty('href') ? 'middle' : null,
     }, style);
+
+
+    // Passing both background:none & backgroundColor can break due to object iteration order
+    if (!mergedStyles.backgroundColor && !mergedStyles.background) {
+      mergedStyles.background = 'none';
+    }
 
     if (disabled && linkButton) {
       return (
